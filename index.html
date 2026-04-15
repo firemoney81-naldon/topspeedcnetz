@@ -1,23 +1,524 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+ <style>
+    /* Noto Sans KR font import */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7; /* Increased line height for better readability */
+      color: #333;
+      background: #f4f7f6; /* Soft background color */
+    }
+    header, nav, section, footer {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      background: #ffffff;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    header {
+      background: linear-gradient(135deg, #fefefe 0%, #fffbfd 100%); /* Soft gradient background */
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+      color: #007bff; /* KT brand color blue */
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    header p {
+      color: #555;
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    nav {
+      background: #007bff; /* Primary navigation color */
+      border-radius: 10px;
+      text-align: center;
+      padding: 18px 0;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 18px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s, opacity 0.3s;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+    nav a:hover {
+      background-color: #0056b3;
+      text-decoration: none;
+    }
+    h2 {
+      border-bottom: 3px solid #007bff; /* Blue line for sections */
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: #007bff;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+    h3 {
+      color: #ff5722; /* Secondary accent color (original orange for focus) */
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-top: 20px;
+    }
+    .card_section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .service_card, .review_card {
+      background: #fdfdfd;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 4px solid #ff5722;
+    }
+    .service_card:hover, .review_card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .cta {
+      display: inline-block;
+      background-color: #ff5722;
+      color: white;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+    }
+    .cta:hover {
+      background-color: #e64a19;
+      transform: translateY(-2px);
+    }
+    form label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #333;
+    }
+    form input[type="text"], form input[type="tel"], form input[type="date"], form input[type="number"], form select, form textarea {
+      width: calc(100% - 20px); /* Adjusting width for padding */
+      padding: 12px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      box-sizing: border-box; /* Include padding in element's total width/height */
+      background: #fcfcfc;
+    }
+    form button {
+      margin-top: 20px;
+      width: 100%;
+      cursor: pointer;
+      border: none;
+    }
+    form fieldset {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: #fafafa;
+    }
+    form legend {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #007bff;
+      padding: 0 10px;
+    }
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 20px;
+      cursor: pointer;
+      color: #007bff;
+      font-size: 1.1rem;
+      padding: 10px;
+      background: #e9f5ff;
+      border-radius: 6px;
+      border-left: 5px solid #ff5722;
+      transition: background-color 0.3s;
+    }
+    dl.faq dt:hover {
+      background-color: #d1eaff;
+    }
+    dl.faq dd {
+      margin-left: 0;
+      margin-top: 10px;
+      padding: 15px;
+      background: #ffffff;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      color: #555;
+      line-height: 1.8;
+    }
+    .image-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .image-container img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    table th {
+      background-color: #e9f5ff;
+      font-weight: 700;
+      color: #007bff;
+    }
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .highlight {
+      color: #ff5722;
+      font-weight: 700;
+    }
+    .bullet-points {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+    .bullet-points li {
+      margin-bottom: 8px;
+    }
+    .note {
+      background-color: #fff3e0;
+      border: 1px solid #ff9800;
+      color: #333;
+      padding: 15px;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      font-size: 0.9rem;
+      color: #777;
+      background: #f0f0f0;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav a {
+        display: block;
+        padding: 10px;
+        margin: 5px 0;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .card_section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <!-- JSON-LD Schema for Service/Product Offer (SEO optimization for AI crawling) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "인터넷 서비스 가입 대행",
+    "name": "KT GiGA 인터넷 가입 센터",
+    "description": "KT 기가 인터넷 1G, 500M, 100M 요금제 신규 가입 상담 및 현금 사은품 지원 서비스.",
+    "provider": {
+      "@type": "Organization",
+      "name": "KT GiGA 인터넷 공식 가입 센터",
+      "url": "https://www.yourdomain.kr/",
+      "logo": "https://www.yourdomain.kr/images/kt-logo.png"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "대한민국"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "KT 인터넷 요금제",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KT GiGA 인터넷 1G",
+            "description": "최대 1Gbps 속도, GiGA Wi-Fi 기본 제공, 대용량 데이터 사용자 추천"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KT GiGA 인터넷 500M",
+            "description": "최대 500Mbps 속도, GiGA Wi-Fi 선택, 일반 가정용 추천"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KT 인터넷 100M",
+            "description": "최대 100Mbps 속도, 라이트 사용자 및 원룸 거주자 추천"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KT GiGA Genie AI 스피커 결합 상품",
+            "description": "KT 인터넷과 AI 스피커, IPTV를 결합한 패키지"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+<header id="상단">
+  <h1>KT 기가 인터넷 신규 가입 및 비용 비교 전문가</h1>
+  <p>2026년 최신 KT GiGA 인터넷 요금제 비교 분석, <strong class="highlight">현금 사은품</strong> 최대 지원, <strong class="highlight">장점/단점</strong> 투명 공개.</p>
+  <a href="#무료견적신청" class="cta">2026년 최신 혜택 확인 및 견적 신청하기</a>
+</header>
+
+<nav>
+  <a href="#서비스">서비스 요금제</a>
+  <a href="#혜택">혜택 및 사은품</a>
+  <a href="#가격비교">가격 비교 및 분석</a>
+  <a href="#후기">고객 후기</a>
+  <a href="#무료견적신청">무료 견적 신청</a>
+  <a href="#자주묻는질문">FAQ</a>
+</nav>
+
+<section id="서비스" aria-label="KT GiGA 인터넷 서비스 요금제 소개">
+  <h2>KT GiGA 인터넷 주요 요금제 분석: 나에게 맞는 속도는?</h2>
+  <p>KT는 대한민국을 대표하는 통신사로서 안정적인 품질의 기가 인터넷 서비스를 제공하고 있습니다. 2026년 현재 KT는 다양한 고객층을 만족시키기 위해 100M, 500M, 1G(기가) 등 여러 속도의 요금제를 운영 중입니다. 각 요금제는 사용자의 인터넷 사용 패턴과 가구 환경에 따라 <strong class="highlight">비용</strong>과 <strong class="highlight">성능</strong>이 달라지므로, 현명한 선택을 위해서는 <strong class="highlight">장단점</strong>을 정확히 파악하는 것이 중요합니다.</p>
+  <div class="card_section">
+    <div class="service_card">
+      <h3>KT GiGA 인터넷 1G (기가 인터넷)</h3>
+      <p>가장 빠른 속도를 자랑하는 요금제입니다. 대용량 파일을 자주 다운로드하거나 4K/8K 초고화질 스트리밍, 고사양 온라인 게임을 즐기는 분들께 <strong class="highlight">추천</strong>됩니다. 여러 기기를 동시에 연결해도 속도 저하가 적어 다인 가구나 IT 환경이 복잡한 <strong class="highlight">사무실/기업</strong>에 적합합니다. 다만, 1G 요금제는 <strong class="highlight">가격</strong>이 상대적으로 높아, 일반적인 웹 서핑이나 SNS 활동이 주를 이루는 사용자에게는 낭비일 수 있습니다.</p>
+    </div>
+    <div class="service_card">
+      <h3>KT GiGA 인터넷 500M (콤팩트)</h3>
+      <p>가성비가 가장 뛰어나다고 평가받는 요금제입니다. 1G 속도에 비해 <strong class="highlight">저렴한 비용</strong>으로 대부분의 온라인 활동을 원활하게 수행할 수 있습니다. 넷플릭스, 유튜브 등 OTT 서비스를 시청하거나 일반적인 온라인 게임을 하는 2~3인 가구에 적합합니다. <strong class="highlight">장점</strong>은 100M 요금제보다 확실히 빠르면서도 1G만큼 비싸지 않다는 점입니다. <strong class="highlight">단점</strong>은 1G 속도가 필요한 환경에서는 미세한 답답함을 느낄 수 있다는 것입니다.</p>
+    </div>
+    <div class="service_card">
+      <h3>KT 인터넷 100M (슬림)</h3>
+      <p>가장 <strong class="highlight">저렴한</strong> 기본 요금제입니다. 주로 1인 가구, <strong class="highlight">원룸</strong> 거주자 또는 인터넷 사용량이 적은 사용자에게 적합합니다. 기본적인 웹 서핑, 이메일, HD급 동영상 시청에는 무리가 없습니다. 그러나 <strong class="highlight">단점</strong>으로는 4K 스트리밍이나 대용량 파일 다운로드 시 속도 저하가 발생하며, 여러 기기를 동시에 사용하면 버퍼링이 생길 수 있습니다. <strong class="highlight">구미</strong> 지역 <strong class="highlight">원룸</strong> 거주자들 사이에서는 <strong class="highlight">가성비</strong>가 좋다는 <strong class="highlight">후기</strong>가 많습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="혜택" aria-label="KT 인터넷 가입 혜택 및 사은품">
+  <h2>2026년 KT GiGA 인터넷 신규 가입 혜택: 현금지원 및 사은품 최대!</h2>
+  <p>통신사 <strong class="highlight">신규 가입</strong> 시 가장 중요한 것은 <strong class="highlight">현금 사은품 지원금</strong>입니다. KT는 2026년에도 다양한 프로모션을 통해 고객들에게 <strong class="highlight">최대 혜택</strong>을 제공하고 있습니다. 단순히 <strong class="highlight">가격</strong>만 비교할 것이 아니라, <strong class="highlight">사은품</strong> 지급액, 결합 할인, 그리고 안정적인 서비스 품질을 종합적으로 고려해야 합니다. 특히 <strong class="highlight">전국</strong> 어디든 동일한 조건으로 <strong class="highlight">현금지원</strong>을 받을 수 있는지 확인하는 것이 중요합니다.</p>
+  <div class="image-container">
+    <img src="https://images.pexels.com/photos/378570/pexels-photo-378570.jpeg" alt="KT 인터넷 가입 혜택 이미지 - 현금 사은품">
+  </div>
+
+  <h3>KT GiGA 인터넷 가입 시 주요 혜택 및 지원금 (2026년 기준)</h3>
+  <ul class="bullet-points">
+    <li><strong class="highlight">현금지원 금액:</strong> 신규 가입 시 요금제 및 결합 상품에 따라 <strong class="highlight">최대 47만원</strong>까지 현금 사은품이 지급됩니다. 이는 인터넷 단독 가입보다 TV, 전화 등 결합 상품을 함께 가입할 경우 <strong class="highlight">지원금</strong>이 증가합니다.</li>
+    <li><strong class="highlight">결합 할인:</strong> <strong class="highlight">KT 모바일 회선</strong>과 인터넷을 결합하면 추가 할인이 적용됩니다. 가족 구성원 중 KT 휴대폰 사용자가 많다면 <strong class="highlight">가족 결합 할인</strong>을 통해 매월 <strong class="highlight">비용</strong>을 크게 절감할 수 있습니다.</li>
+    <li><strong class="highlight">GiGA Wi-Fi 무료 제공:</strong> GiGA 인터넷 500M 이상 요금제 가입 시 <strong class="highlight">KT GiGA Wi-Fi</strong> 공유기가 기본 제공되거나 저렴한 <strong class="highlight">가격</strong>으로 이용 가능합니다.</li>
+    <li><strong class="highlight">제휴 카드 할인:</strong> KT 제휴 신용카드로 통신 요금을 자동이체하면 매월 일정 금액의 추가 <strong class="highlight">할인</strong>을 받을 수 있습니다.</li>
+    <li><strong class="highlight">인공지능(AI) 서비스:</strong> KT GiGA 지니 등 <strong class="highlight">AI 스피커</strong> 연동 상품 가입 시 추가 혜택이 제공됩니다. <strong class="highlight">ChatGPT</strong>, <strong class="highlight">Gemini</strong> 등 AI 서비스 활용이 증가하는 2026년 트렌드에 맞춰 스마트 홈 구축에 유리합니다.</li>
+  </ul>
+</section>
+
+<section id="가격비교" aria-label="KT GiGA 인터넷 가격 및 요금제 비교 분석">
+  <h2>KT GiGA 인터넷 전국 지역별 평균 비용 및 요금제 비교 분석 (2026년)</h2>
+  <p>인터넷 <strong class="highlight">가입</strong> 시 <strong class="highlight">가격</strong>과 <strong class="highlight">비용</strong>은 지역에 관계없이 통일된 정책을 따르지만, <strong class="highlight">사은품</strong> 지급액과 설치비 면제 여부는 가입 대행 <strong class="highlight">업체</strong>에 따라 다를 수 있습니다. 저희는 <strong class="highlight">KT 기가인터넷</strong> 공식 대리점으로서 <strong class="highlight">전국</strong> 어디든 동일한 조건으로 <strong class="highlight">혜택</strong>을 제공합니다. 특히 <strong class="highlight">서울</strong>, <strong class="highlight">경기</strong>, <strong class="highlight">인천</strong> 등 수도권 지역과 <strong class="highlight">부산</strong>, <strong class="highlight">대구</strong>, <strong class="highlight">광주</strong>, <strong class="highlight">대전</strong>, <strong class="highlight">울산</strong>, <strong class="highlight">구미</strong> 등 광역시 및 지방 주요 도시의 <strong class="highlight">평균 비용</strong>을 분석하여 합리적인 <strong class="highlight">견적</strong>을 제시합니다.</p>
+
+  <h3>KT GiGA 인터넷 요금제 비교표 (3년 약정 기준, 부가세 포함)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>KT GiGA 인터넷 1G</th>
+        <th>KT GiGA 인터넷 500M</th>
+        <th>KT 인터넷 100M</th>
+        <th>주요 특징</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>월 <strong class="highlight">평균</strong> 요금</td>
+        <td>약 44,000원</td>
+        <td>약 38,500원</td>
+        <td>약 27,500원</td>
+        <td>(결합 할인 미적용 기준)</td>
+      </tr>
+      <tr>
+        <td>현금 <strong class="highlight">지원금</strong></td>
+        <td>최대 47만원</td>
+        <td>최대 45만원</td>
+        <td>최대 30만원</td>
+        <td>가입 조건 및 <strong class="highlight">업체</strong>에 따라 변동 가능</td>
+      </tr>
+      <tr>
+        <td>추천 <strong class="highlight">사용자</strong></td>
+        <td>4인 이상 가구, 게이머, 기업/사무실, <strong class="highlight">유튜브</strong>/스트리밍 크리에이터</td>
+        <td>2~3인 가구, 일반 가정용, <strong class="highlight">내돈내산</strong> 가성비 추구</td>
+        <td>1인 가구, <strong class="highlight">원룸</strong> 거주자, 라이트 유저</td>
+      </tr>
+      <tr>
+        <td><strong class="highlight">장점</strong></td>
+        <td>가장 빠른 속도, 안정성 최상, <strong class="highlight">AI</strong> 서비스 연동 용이</td>
+        <td><strong class="highlight">가격</strong> 대비 성능비 우수, 대부분의 환경에서 충분</td>
+        <td>가장 <strong class="highlight">저렴한</strong> <strong class="highlight">비용</strong>, 기본 사용에 충실</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <p><strong>참고:</strong> 위 표의 요금 및 <strong class="highlight">현금 지원금</strong>은 2026년 3월 기준 <strong class="highlight">예상</strong>치이며, KT의 정책 변경 및 <strong class="highlight">신규 가입</strong> 프로모션에 따라 달라질 수 있습니다. 정확한 <strong class="highlight">비용</strong>은 <strong class="highlight">무료견적신청</strong> 후 상담을 통해 확인하세요.</p>
+  </div>
+  <p>저희는 <strong class="highlight">KT 인터넷 가입</strong> <strong class="highlight">순위</strong>에서 상위권을 유지하는 <strong class="highlight">전문 업체</strong>로서, 고객 만족 <strong class="highlight">후기</strong>를 바탕으로 투명하게 <strong class="highlight">가격</strong>을 공개합니다. <strong class="highlight">디시인사이드</strong> 등 온라인 커뮤니티에서 <strong class="highlight">내돈내산</strong> <strong class="highlight">후기</strong>를 확인해보시면 저희 <strong class="highlight">업체</strong>의 신뢰도를 알 수 있습니다.</p>
+</section>
+
+<section id="후기" aria-label="고객 사례 및 후기">
+  <h2>고객 사례 및 내돈내산 후기</h2>
+  <div class="card_section">
+    <div class="review_card">
+      <h3>서울시 강남구 고객 후기 (GiGA 인터넷 1G + TV)</h3>
+      <p>“이사하면서 KT <strong class="highlight">신규 가입</strong>을 했습니다. <strong class="highlight">가격</strong> <strong class="highlight">비교</strong>를 여러 곳 했는데, <strong class="highlight">현금지원</strong> 금액이 가장 높았습니다. 설치 기사님도 친절하시고, 특히 <strong class="highlight">유튜브</strong> 4K 시청이나 <strong class="highlight">트위터</strong> 라이브 스트리밍 시 버퍼링이 전혀 없어 만족합니다.”</p>
+    </div>
+    <div class="review_card">
+      <h3>경상북도 구미시 고객 후기 (인터넷 500M + 가족결합)</h3>
+      <p>“<strong class="highlight">구미</strong> 지역 <strong class="highlight">이사</strong> 후 <strong class="highlight">원룸</strong>에서 <strong class="highlight">KT 기가인터넷</strong>을 설치했습니다. <strong class="highlight">비용</strong>이 부담될까 걱정했는데, 가족 결합으로 <strong class="highlight">할인</strong>을 많이 받았습니다. <strong class="highlight">가격</strong> 대비 속도 만족도가 매우 높고, <strong class="highlight">사은품</strong>도 당일 지급되어 좋았습니다.”</p>
+    </div>
+    <div class="review_card">
+      <h3>인천시 계양구 고객 후기 (사무실 기업 인터넷)</h3>
+      <p>“사무실 확장이전으로 <strong class="highlight">기업 이사</strong> 후 <strong class="highlight">KT GiGA 인터넷</strong>을 설치했습니다. 안정적인 <strong class="highlight">B2B</strong> 서비스가 필요했는데, 저희 <strong class="highlight">업체</strong>의 요구사항을 정확히 파악하여 맞춤 <strong class="highlight">견적</strong>을 주셨습니다. <strong class="highlight">후기</strong>를 보니 <strong class="highlight">전문성</strong>이 뛰어나다고 해서 선택했는데, 역시 만족합니다.”</p>
+    </div>
+  </div>
+</section>
+
+<section id="무료견적신청" aria-label="무료 견적 신청 및 맞춤 상담">
+  <h2>KT GiGA 인터넷 무료 견적 및 맞춤 상담 신청 (전국 지역 가능)</h2>
+  <form action="/submit-estimate" method="POST" aria-describedby="견적폼설명">
+    <p id="견적폼설명">아래 폼을 작성해주시면 전국 어디든 <strong class="highlight">KT GiGA 인터넷</strong> <strong class="highlight">신규 가입</strong> 상담 및 <strong class="highlight">비용</strong> <strong class="highlight">견적</strong>을 빠르게 도와드립니다. <strong class="highlight">서울</strong>, <strong class="highlight">경기</strong>, <strong class="highlight">인천</strong>, <strong class="highlight">부산</strong>, <strong class="highlight">대구</strong>, <strong class="highlight">광주</strong>, <strong class="highlight">대전</strong>, <strong class="highlight">울산</strong>, <strong class="highlight">구미</strong>, <strong class="highlight">제주</strong> 등 전국 모든 지역 가능합니다.</p>
+
+    <fieldset>
+      <legend>필수 정보 입력</legend>
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="실명 입력" required />
+
+      <label for="phone">연락처</label>
+      <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+      <label for="address_city">설치 희망 지역</label>
+      <input type="text" id="address_city" name="address_city" placeholder="예: 구미시, 서울시 강남구" required />
+    </fieldset>
+
+    <fieldset>
+      <legend>상세 요금제 및 결합 정보</legend>
+      <label for="product_type">희망 상품 선택</label>
+      <select id="product_type" name="product_type" required>
+        <option value="">상품을 선택하세요</option>
+        <option value="GiGA-1G">KT GiGA 인터넷 1G</option>
+        <option value="GiGA-500M">KT GiGA 인터넷 500M</option>
+        <option value="Internet-100M">KT 인터넷 100M</option>
+        <option value="B-T-GiGA">인터넷 + TV + GiGA Genie 결합</option>
+        <option value="B-T">인터넷 + TV 결합</option>
+        <option value="B-GiGA">인터넷 + GiGA Wi-Fi 결합</option>
+      </select>
+
+      <label for="mobile_carrier">모바일 통신사 (결합 할인 확인)</label>
+      <select id="mobile_carrier" name="mobile_carrier" required>
+        <option value="">사용 중인 모바일 통신사</option>
+        <option value="KT">KT (가족 결합 할인)</option>
+        <option value="SKT">SKT (경쟁사 비교)</option>
+        <option value="LGU+">LG U+ (경쟁사 비교)</option>
+        <option value="None">해당 없음</option>
+      </select>
+
+      <label for="mobile_lines">모바일 결합 회선 수 (본인 포함)</label>
+      <input type="number" id="mobile_lines" name="mobile_lines" placeholder="예: 3 (가족 결합 시)" min="1" max="10" />
+
+      <label for="installation_date">설치 희망일</label>
+      <input type="date" id="installation_date" name="installation_date" required />
+    </fieldset>
+
+    <fieldset>
+      <legend>추가 문의 사항 (선택 사항)</legend>
+      <label for="comment">추가 문의 내용</label>
+      <textarea id="comment" name="comment" rows="4" placeholder="예: TV 채널 구성 문의, 사은품 지급 시점 문의, 2026년 최신 요금제 할인 문의"></textarea>
+    </fieldset>
+
+    <button type="submit" class="cta">견적 요청하고 혜택 상담받기</button>
+  </form>
+</section>
+
+<section id="자주묻는질문" aria-label="자주 묻는 질문 FAQ">
+  <h2>자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>Q1: KT GiGA 인터넷 <strong class="highlight">신규 가입</strong> 시 <strong class="highlight">현금 지원금</strong>은 얼마인가요?</dt>
+    <dd>A1: <strong class="highlight">현금 지원금</strong>은 가입하는 요금제와 결합 상품(TV, 전화 등) 여부에 따라 달라집니다. 2026년 기준으로 인터넷 단독 가입 시 20~30만원, TV 결합 시 최대 47만원까지 <strong class="highlight">현금지원</strong>이 가능합니다. 정확한 금액은 상담을 통해 확인하세요.</dd>
+
+    <dt>Q2: KT <strong class="highlight">기가인터넷</strong>과 100M 인터넷의 <strong class="highlight">차이점</strong>은 무엇인가요?</dt>
+    <dd>A2: <strong class="highlight">KT GiGA 인터넷</strong>은 500Mbps 또는 1Gbps의 속도를 제공하며, 100M 인터넷은 100Mbps의 속도를 제공합니다. <strong class="highlight">가격</strong> <strong class="highlight">차이점</strong>은 존재하지만, 다인 가구 또는 고사양 작업을 하는 사용자에게는 속도 체감이 매우 큽니다. <strong class="highlight">원룸</strong> 거주자가 아니라면 500M 이상을 <strong class="highlight">추천</strong>합니다.</dd>
+
+    <dt>Q3: <strong class="highlight">KT 인터넷 가입</strong> <strong class="highlight">전문 업체</strong>를 이용하는 <strong class="highlight">장점</strong>은 무엇인가요?</dt>
+    <dd>A3: 공식 <strong class="highlight">업체</strong>는 본사 직영 채널과 달리 <strong class="highlight">현금 사은품</strong>을 더 많이 제공하는 경우가 많습니다. 또한 <strong class="highlight">전국</strong> 어디든 방문 설치가 가능하며, 고객 맞춤형 <strong class="highlight">가격</strong> <strong class="highlight">비교</strong> 및 <strong class="highlight">견적</strong> 상담을 통해 <strong class="highlight">저렴한곳</strong>을 찾을 수 있도록 돕습니다. <strong class="highlight">구미</strong>, <strong class="highlight">부산</strong> 등 지방에서도 동일한 혜택을 받을 수 있습니다.</dd>
+
+    <dt>Q4: KT 인터넷 <strong class="highlight">신규 가입</strong> 시 설치 <strong class="highlight">비용</strong>은 얼마인가요?</dt>
+    <dd>A4: 2026년 기준, KT 인터넷 <strong class="highlight">신규 가입</strong> 시 설치 <strong class="highlight">비용</strong>은 약 27,500원입니다. 다만, 특정 기간 프로모션을 통해 설치비를 면제해주는 경우가 많으므로 상담 시 꼭 문의하시기 바랍니다.</dd>
+
+    <dt>Q5: <strong class="highlight">보관이사</strong>로 인해 잠시 인터넷을 정지해야 하는데 가능한가요?</dt>
+    <dd>A5: 네, <strong class="highlight">이사</strong> 등의 사유로 최대 3개월까지 인터넷 일시정지가 가능합니다. 단, 약정 기간은 정지 기간만큼 연장됩니다. 자세한 사항은 고객센터를 통해 확인해 주세요. <strong class="highlight">구미</strong> 지역 <strong class="highlight">보관이사</strong> 시에도 동일하게 적용됩니다.</dd>
+  </dl>
+</section>
+
+<section id="추가정보" aria-label="KT GiGA 인터넷 심화 정보">
+  <h2>KT GiGA 인터넷의 기술적 장점 및 경쟁사 비교 분석</h2>
+  <p>KT <strong class="highlight">GiGA 인터넷</strong>은 경쟁사인 SKT와 LG U+에 비해 상대적으로 안정적인 품질로 알려져 있습니다. KT는 국내 최대 규모의 광케이블 망을 보유하고 있어 <strong class="highlight">전국</strong> 어디든 균일한 품질의 인터넷 서비스를 제공합니다. 특히 <strong class="highlight">구미</strong>, <strong class="highlight">대구</strong> 등 지역 거점 도시에서는 KT의 인프라 우위가 두드러집니다. <strong class="highlight">Gemini</strong>나 <strong class="highlight">ChatGPT</strong> 같은 <strong class="highlight">AI</strong> 서비스의 사용량이 증가하고 <strong class="highlight">유튜브</strong>, <strong class="highlight">페이스북</strong> 등 소셜 미디어 플랫폼에서 고화질 영상 콘텐츠 소비가 늘어나는 현시점에서 안정성은 매우 중요한 <strong class="highlight">장점</strong>입니다.</p>
+
+  <h3>경쟁사와의 <strong class="highlight">차이점</strong> 분석</h3>
+  <p>SKT와 LG U+ 역시 <strong class="highlight">기가인터넷</strong>을 제공하지만, 각 사별로 특징이 다릅니다. SKT는 모바일 결합 시 <strong class="highlight">할인</strong> 폭이 크다는 <strong class="highlight">장점</strong>이 있고, LG U+는 IPTV 콘텐츠 경쟁력이 높다는 <strong class="highlight">장점</strong>이 있습니다. 하지만 <strong class="highlight">KT GiGA 인터넷</strong>은 속도의 안정성 면에서 강점을 보이며, <strong class="highlight">PC방</strong>이나 <strong class="highlight">사무실</strong> 등 높은 대역폭과 낮은 지연시간(Latency)이 필요한 곳에서 선호됩니다. <strong class="highlight">KT</strong>는 <strong class="highlight">AI</strong> 기술을 활용한 스마트 홈 솔루션 개발에도 적극적으로 투자하여 <strong class="highlight">미래 지향적</strong>인 서비스를 제공하고 있습니다.</p>
+
+  <h3><strong class="highlight">네이버</strong>, <strong class="highlight">구글</strong>, <strong class="highlight">유튜브</strong> 검색 키워드 분석</h3>
+  <p>고객들은 <strong class="highlight">네이버</strong> 검색창에 "KT <strong class="highlight">기가인터넷</strong> <strong class="highlight">가격</strong> <strong class="highlight">비교</strong>", "KT 인터넷 <strong class="highlight">현금지원</strong> <strong class="highlight">업체</strong>", "<strong class="highlight">구미</strong> <strong class="highlight">이사</strong> 후 <strong class="highlight">인터넷</strong> <strong class="highlight">가입</strong>" 등의 키워드로 정보를 탐색합니다. <strong class="highlight">구글</strong> 검색에서는 보다 전문적인 정보를 찾으며, <strong class="highlight">유튜브</strong>에서는 <strong class="highlight">내돈내산</strong> <strong class="highlight">후기</strong> 영상을 참고합니다. 저희 <strong class="highlight">업체</strong>는 이러한 고객들의 검색 패턴을 분석하여 최적화된 정보를 제공함으로써 <strong class="highlight">가입 순위</strong>를 높이고 있습니다.</p>
+
+  <h3>지역별 특성과 <strong class="highlight">가입</strong> <strong class="highlight">순위</strong> (2026년 3월 기준)</h3>
+  <p><strong class="highlight">서울</strong>, <strong class="highlight">부산</strong>, <strong class="highlight">대구</strong>, <strong class="highlight">인천</strong>, <strong class="highlight">대전</strong>, <strong class="highlight">광주</strong>, <strong class="highlight">울산</strong>, <strong class="highlight">세종</strong> 등 주요 도시에서는 <strong class="highlight">KT GiGA 인터넷</strong>의 <strong class="highlight">신규 가입</strong>이 활발합니다. 특히 <strong class="highlight">경기</strong> 지역의 <strong class="highlight">구리</strong>, <strong class="highlight">파주</strong>, <strong class="highlight">김포</strong>, <strong class="highlight">용인</strong>, <strong class="highlight">성남</strong>, <strong class="highlight">수원</strong>, <strong class="highlight">화성</strong>, <strong class="highlight">고양</strong>, <strong class="highlight">남양주</strong> 등 신도시 지역에서는 인구 증가에 따라 <strong class="highlight">가입</strong> 수요가 높습니다. <strong class="highlight">충청</strong> 지역의 <strong class="highlight">천안</strong>, <strong class="highlight">청주</strong>, <strong class="highlight">전라</strong> 지역의 <strong class="highlight">전주</strong>, <strong class="highlight">순천</strong>, <strong class="highlight">경상</strong> 지역의 <strong class="highlight">구미</strong>, <strong class="highlight">창원</strong>, <strong class="highlight">포항</strong>, <strong class="highlight">제주</strong> 등 <strong class="highlight">전국</strong> 각지에서 <strong class="highlight">KT</strong>의 안정적인 망 구축 덕분에 꾸준한 <strong class="highlight">가입</strong>이 이루어지고 있습니다.</p>
+</section>
+
+<section id="외부사이트" aria-label="신뢰성 있는 외부 사이트">
+  <h2>신뢰성 있는 외부 사이트 (공식 정보 확인)</h2>
+  <p>저희는 고객들에게 투명한 정보를 제공하기 위해 공신력 있는 외부 사이트 정보를 함께 제공합니다. <strong class="highlight">KT GiGA 인터넷</strong> 관련 정책 및 <strong class="highlight">비용</strong>은 아래 사이트에서 직접 확인하실 수 있습니다.</p>
+  <ul>
+    <li><a href="https://www.kt.com/" target="_blank">KT 공식 웹사이트</a> - 요금제 및 상품 정보, 약관 확인</li>
+    <li><a href="https://www.kcc.go.kr/user.do?mode=list&page=1&boardId=1043&catId=11&menuId=1078&submId=121" target="_blank">방송통신위원회 (KCC)</a> - 통신 요금 및 정책 관련 정보</li>
+    <li><a href="https://namu.wiki/w/KT%EC%9D%B8%ED%84%B0%EB%84%B7" target="_blank">나무위키: KT 인터넷</a> - KT 인터넷 역사 및 서비스 특징 정보 (참고 자료)</li>
+    <li><a href="https://www.moit.go.kr/" target="_blank">과학기술정보통신부</a> - ICT 정책 및 초고속 인터넷 관련 정부 발표</li>
+    <li><a href="https://www.consumer.go.kr/" target="_blank">한국소비자원</a> - 인터넷 서비스 관련 소비자 피해 구제 및 분쟁 조정 정보</li>
+  </ul>
+</section>
+
+  
